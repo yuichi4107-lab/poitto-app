@@ -1,0 +1,6 @@
+# ローカル開発用（`cp .dev.vars.example .dev.vars` してから値を入れてください）
+# Deploy to Cloudflare ボタンでは、ここに書いた名前のシークレットを設置時に入力します。
+# クッキー署名用のランダムな鍵（例: openssl rand -hex 32 の出力）
+COOKIE_SIGNING_KEY=
+# 初回セットアップ／ログイン用のパスフレーズ（自分で決めた長めの文字列）
+ADMIN_SETUP_PASSPHRASE=

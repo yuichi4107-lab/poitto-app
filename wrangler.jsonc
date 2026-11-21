@@ -1,0 +1,31 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // ポイッと — 自分専用のファイル＆テキスト受け渡しアプリ
+  "name": "poitto",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-11-20",
+  "workers_dev": true,
+  "preview_urls": false,
+  "upload_source_maps": true,
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./frontend",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "single-page-application",
+    "html_handling": "auto-trailing-slash"
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "HUB", "class_name": "Hub" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Hub"] }],
+  "r2_buckets": [{ "binding": "BUCKET", "bucket_name": "poitto-items" }],
+  "triggers": { "crons": ["*/15 * * * *"] },
+  "vars": {
+    "RETENTION_HOURS": "24",
+    "MAX_FILE_BYTES": "2147483648"
+  },
+  "secrets": {
+    "required": ["COOKIE_SIGNING_KEY", "ADMIN_SETUP_PASSPHRASE"]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "poitto-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ポイッと — 自分の端末どうしでファイルとテキストを受け渡す、自分専用のWebアプリ（Cloudflare Workers + R2）",
+  "license": "MIT",
+  "author": "Yuichi Nakada",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "cloudflare": {
+    "bindings": {
+      "COOKIE_SIGNING_KEY": {
+        "description": "ログイン用クッキーに署名するためのランダムな鍵です。64文字程度のランダムな英数字を入れてください（例: `openssl rand -hex 32` で生成）。他人に教えないでください。"
+      },
+      "ADMIN_SETUP_PASSPHRASE": {
+        "description": "初回セットアップとログインに使うパスフレーズです。自分で決めた、推測されにくい長めの文字列を入れてください。設置後、最初に開いた画面でこのパスフレーズを入力すると使い始められます。"
+      }
+    }
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261121.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.166.0"
+  }
+}
